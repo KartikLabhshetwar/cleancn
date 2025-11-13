@@ -18,18 +18,50 @@ const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
         ref={ref}
         className={cn(
           "rounded-(--radius-lg) border-(length:--border-weight) border-border bg-card text-card-foreground",
+          "relative overflow-hidden",
+          hasGlassEffect && "glass-card",
           className
         )}
         style={{
-          boxShadow: "var(--card-shadow, 0 1px 3px 0 rgb(0 0 0 / 0.1))",
-          ...(blurValue && {
-            backdropFilter: `blur(${blurValue}) saturate(180%)`,
-            WebkitBackdropFilter: `blur(${blurValue}) saturate(180%)`,
+          ...(hasGlassEffect ? {
+            background: "rgba(255, 255, 255, 0.15)",
+            backdropFilter: `blur(${blurValue})`,
+            WebkitBackdropFilter: `blur(${blurValue})`,
+            border: "1px solid rgba(255, 255, 255, 0.3)",
+            borderRadius: "20px",
+            boxShadow: `
+              0 8px 32px rgba(0, 0, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5),
+              inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+              inset 0 0 16px 8px rgba(255, 255, 255, 0.8)
+            `,
+          } : {
+            boxShadow: "var(--card-shadow, 0 1px 3px 0 rgb(0 0 0 / 0.1))",
           }),
           ...style,
         } as React.CSSProperties}
         {...props}
-      />
+      >
+        {hasGlassEffect && (
+          <>
+            <div
+              className="absolute top-0 left-0 right-0 h-px pointer-events-none z-10"
+              style={{
+                background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent)",
+              }}
+            />
+            <div
+              className="absolute top-0 left-0 w-px h-full pointer-events-none z-10"
+              style={{
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3))",
+              }}
+            />
+          </>
+        )}
+        <div className="relative z-0">
+          {props.children}
+        </div>
+      </div>
     );
   }
 );

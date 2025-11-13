@@ -23,6 +23,33 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Footer, FooterContent, FooterSection, FooterTitle, FooterLink } from "@/components/ui/footer";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { MoreHorizontal, Settings, User, LogOut, Download } from "lucide-react";
 
 export default function Home() {
   const { theme, setTheme } = useTheme();
@@ -48,7 +75,7 @@ export default function Home() {
     <div 
       className="min-h-screen bg-background relative"
       style={isGlassmorphism ? {
-        background: "linear-gradient(135deg, oklch(0.95 0.05 30) 0%, oklch(0.92 0.08 40) 50%, oklch(0.90 0.10 50) 100%)",
+        background: "linear-gradient(135deg, oklch(0.98 0 0) 0%, oklch(0.95 0.01 0) 50%, oklch(0.97 0.01 0) 100%)",
       } : undefined}
     >
       <Nav>
@@ -67,9 +94,11 @@ export default function Home() {
       </Nav>
 
       <Hero>
-        <HeroTitle className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl">Change Your Ugly AI Generated Site to Good and Beautiful Site in Just One Prompt Using Cleancn</HeroTitle>
+        <HeroTitle>
+          Transform AI Sites into Beautiful Designs Instantly
+        </HeroTitle>
         <HeroSubtitle>
-          AI-powered theme engine that instantly restyles your website. Choose from 18 professional design presets or create your own with natural language. Works seamlessly with Cursor AI, Claude, and other AI coding assistants.
+        Change Your Ugly AI Generated Site to Good and Beautiful Site in Just One Prompt Using Cleancn
         </HeroSubtitle>
         <HeroActions>
           <Button size="lg" onClick={() => document.getElementById("themes")?.scrollIntoView({ behavior: "smooth" })}>
@@ -490,6 +519,242 @@ export default function Home() {
 
             <Card>
               <CardHeader>
+                <CardTitle>Dropdown Menu</CardTitle>
+                <CardDescription>Context menu with actions</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-4">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline">
+                        <MoreHorizontal className="h-4 w-4" />
+                        Options
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>
+                        <User className="mr-2 h-4 w-4" />
+                        <span>Profile</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Settings className="mr-2 h-4 w-4" />
+                        <span>Settings</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Download className="mr-2 h-4 w-4" />
+                        <span>Download</span>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem variant="destructive">
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Log out</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Toast Notifications</CardTitle>
+                <CardDescription>Success, error, and info messages</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  <Button
+                    onClick={() => toast.success("Operation completed successfully!")}
+                    size="sm"
+                  >
+                    Success Toast
+                  </Button>
+                  <Button
+                    onClick={() => toast.error("Something went wrong!")}
+                    variant="destructive"
+                    size="sm"
+                  >
+                    Error Toast
+                  </Button>
+                  <Button
+                    onClick={() => toast("Here's some information", { description: "Additional details can go here" })}
+                    variant="outline"
+                    size="sm"
+                  >
+                    Info Toast
+                  </Button>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Click buttons above to see toast notifications
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Tabs</CardTitle>
+                <CardDescription>Tabbed navigation interface</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Tabs defaultValue="account" className="w-full">
+                  <TabsList className="grid w-full grid-cols-3">
+                    <TabsTrigger value="account">Account</TabsTrigger>
+                    <TabsTrigger value="password">Password</TabsTrigger>
+                    <TabsTrigger value="settings">Settings</TabsTrigger>
+                  </TabsList>
+                  <TabsContent value="account" className="mt-4">
+                    <p className="text-sm text-muted-foreground">
+                      Make changes to your account here.
+                    </p>
+                  </TabsContent>
+                  <TabsContent value="password" className="mt-4">
+                    <p className="text-sm text-muted-foreground">
+                      Change your password here.
+                    </p>
+                  </TabsContent>
+                  <TabsContent value="settings" className="mt-4">
+                    <p className="text-sm text-muted-foreground">
+                      Manage your settings here.
+                    </p>
+                  </TabsContent>
+                </Tabs>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Data Table</CardTitle>
+                <CardDescription>Structured data display</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="rounded-md border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Role</TableHead>
+                        <TableHead className="text-right">Amount</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell className="font-medium">John Doe</TableCell>
+                        <TableCell>Active</TableCell>
+                        <TableCell>Admin</TableCell>
+                        <TableCell className="text-right">$250.00</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Jane Smith</TableCell>
+                        <TableCell>Active</TableCell>
+                        <TableCell>User</TableCell>
+                        <TableCell className="text-right">$150.00</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell className="font-medium">Bob Johnson</TableCell>
+                        <TableCell>Inactive</TableCell>
+                        <TableCell>User</TableCell>
+                        <TableCell className="text-right">$75.00</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Progress Bars</CardTitle>
+                <CardDescription>Loading and completion indicators</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Upload Progress</span>
+                    <span>45%</span>
+                  </div>
+                  <Progress value={45} />
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Storage Used</span>
+                    <span>78%</span>
+                  </div>
+                  <Progress value={78} />
+                </div>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Task Completion</span>
+                    <span>100%</span>
+                  </div>
+                  <Progress value={100} />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Accordion</CardTitle>
+                <CardDescription>Collapsible content sections</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Accordion type="single" collapsible className="w-full">
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                    <AccordionContent>
+                      Yes. It adheres to the WAI-ARIA design pattern and uses semantic HTML.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="item-2">
+                    <AccordionTrigger>Is it styled?</AccordionTrigger>
+                    <AccordionContent>
+                      Yes. It comes with default styles that match the theme, but can be customized.
+                    </AccordionContent>
+                  </AccordionItem>
+                  <AccordionItem value="item-3">
+                    <AccordionTrigger>Is it animated?</AccordionTrigger>
+                    <AccordionContent>
+                      Yes. It uses CSS animations for smooth expand and collapse transitions.
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Separators</CardTitle>
+                <CardDescription>Visual dividers and spacing</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-medium">Section Title</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Content above the separator
+                    </p>
+                  </div>
+                  <Separator className="my-4" />
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-medium">Another Section</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Content below the separator
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-sm">Left</span>
+                  <Separator orientation="vertical" className="h-4" />
+                  <span className="text-sm">Middle</span>
+                  <Separator orientation="vertical" className="h-4" />
+                  <span className="text-sm">Right</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
                 <CardTitle>Nested Cards</CardTitle>
                 <CardDescription>Cards within cards</CardDescription>
               </CardHeader>
@@ -498,9 +763,9 @@ export default function Home() {
                   <CardHeader>
                     <CardTitle className="text-lg">Nested Card</CardTitle>
                     <CardDescription>This card is nested inside another card</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
                       All UI elements use the same design tokens for a cohesive look.
                     </p>
                   </CardContent>
@@ -625,6 +890,59 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Footer>
+        <FooterContent>
+          <div className="grid gap-8 md:grid-cols-4">
+            <FooterSection>
+              <FooterTitle>Cleancn</FooterTitle>
+              <p className="text-sm text-muted-foreground">
+                Transform your website with a single prompt. AI-powered theme engine for modern web design.
+              </p>
+            </FooterSection>
+
+            <FooterSection>
+              <FooterTitle>Product</FooterTitle>
+              <div className="space-y-2">
+                <FooterLink href="#themes">Themes</FooterLink>
+                <FooterLink href="#components">Components</FooterLink>
+                <FooterLink href="#prompts">Prompts</FooterLink>
+              </div>
+            </FooterSection>
+
+            <FooterSection>
+              <FooterTitle>Resources</FooterTitle>
+              <div className="space-y-2">
+                <FooterLink href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </FooterLink>
+                <FooterLink href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  Documentation
+                </FooterLink>
+                <FooterLink href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  Examples
+                </FooterLink>
+              </div>
+            </FooterSection>
+
+            <FooterSection>
+              <FooterTitle>Legal</FooterTitle>
+              <div className="space-y-2">
+                <FooterLink href="/license">License</FooterLink>
+                <FooterLink href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  Privacy
+                </FooterLink>
+                <FooterLink href="https://github.com" target="_blank" rel="noopener noreferrer">
+                  Terms
+                </FooterLink>
+              </div>
+            </FooterSection>
+          </div>
+          <div className="mt-8 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+            <p>© {new Date().getFullYear()} Cleancn. All rights reserved.</p>
+          </div>
+        </FooterContent>
+      </Footer>
     </div>
   );
 }

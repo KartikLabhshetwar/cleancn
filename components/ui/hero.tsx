@@ -6,7 +6,8 @@ const Hero = React.forwardRef<HTMLElement, React.HTMLAttributes<HTMLElement>>(
     <section
       ref={ref}
       className={cn(
-        "flex min-h-[60vh] flex-col items-center justify-center gap-8 bg-background px-6 py-24 text-center",
+        "flex min-h-[70vh] flex-col items-center justify-center bg-background px-6 py-32 text-center",
+        "md:min-h-[80vh] md:py-40",
         className
       )}
       {...props}
@@ -21,10 +22,12 @@ const HeroTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <h1
     ref={ref}
-    className={cn(
-      "text-[var(--font-size-h1)] font-bold leading-tight tracking-tight text-foreground",
-      className
-    )}
+      className={cn(
+        "font-bold leading-[1.1] tracking-tight text-foreground",
+        "mb-6 max-w-4xl",
+        "text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl",
+        className
+      )}
     {...props}
   />
 ));
@@ -37,7 +40,9 @@ const HeroSubtitle = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      "max-w-2xl text-lg text-muted-foreground",
+      "max-w-2xl text-lg leading-relaxed text-muted-foreground",
+      "mb-10",
+      "text-base sm:text-lg md:text-xl",
       className
     )}
     {...props}
@@ -51,7 +56,11 @@ const HeroActions = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-wrap items-center justify-center gap-4", className)}
+    className={cn(
+      "flex flex-wrap items-center justify-center gap-4",
+      "mt-4",
+      className
+    )}
     {...props}
   />
 ));
