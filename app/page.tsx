@@ -1,65 +1,111 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Hero, HeroTitle, HeroSubtitle, HeroActions } from "@/components/ui/hero";
+import { Nav, NavBrand, NavList, NavItem, NavLink } from "@/components/ui/nav";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Sparkles, Palette, Zap } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="min-h-screen bg-background">
+      <Nav>
+        <NavBrand href="/">Cleancn</NavBrand>
+        <NavList>
+          <NavItem>
+            <NavLink href="/demo">Demo</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/demo/before-after">Before/After</NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink href="/recipes">Recipes</NavLink>
+          </NavItem>
+        </NavList>
+      </Nav>
+
+      <Hero>
+        <HeroTitle>Transform Your Site with a Single Prompt</HeroTitle>
+        <HeroSubtitle>
+          AI-powered theme engine that instantly restylesyour website. Choose from 18 professional design presets or create your own with natural language.
+        </HeroSubtitle>
+        <HeroActions>
+          <Button size="lg" asChild>
+            <Link href="/demo">Try Demo</Link>
+          </Button>
+          <Button variant="outline" size="lg" asChild>
+            <Link href="/recipes">View Recipes</Link>
+          </Button>
+        </HeroActions>
+      </Hero>
+
+      <section className="bg-muted/50 px-6 py-24">
+        <div className="mx-auto max-w-7xl">
+          <h2 className="mb-12 text-center text-3xl font-bold">Features</h2>
+          <div className="grid gap-8 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <Sparkles className="mb-4 h-10 w-10 text-primary" />
+                <CardTitle>Prompt-Powered Themes</CardTitle>
+                <CardDescription>
+                  Describe your design vision in plain English and watch it come to life instantly
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  No CSS knowledge required. Just type what you want: "minimal, calm, muted" or "neon, bold, cyberpunk"
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Palette className="mb-4 h-10 w-10 text-primary" />
+                <CardTitle>18 Professional Presets</CardTitle>
+                <CardDescription>
+                  Carefully crafted design styles from Neobrutalism to Glassmorphism
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Each preset is production-ready and follows modern design principles with accessibility in mind
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <Zap className="mb-4 h-10 w-10 text-primary" />
+                <CardTitle>Instant Application</CardTitle>
+                <CardDescription>
+                  See changes in real-time as you experiment with different styles
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Live preview with before/after comparison. Export theme JSON for your projects
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-24">
+        <div className="mx-auto max-w-7xl text-center">
+          <h2 className="mb-4 text-3xl font-bold">Ready to Transform Your Design?</h2>
+          <p className="mb-8 text-lg text-muted-foreground">
+            Start with a preset or create your own unique theme
           </p>
+          <div className="flex justify-center gap-4">
+            <Button size="lg" asChild>
+              <Link href="/demo">Get Started</Link>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <Link href="/recipes">Browse Recipes</Link>
+            </Button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </section>
     </div>
   );
 }
