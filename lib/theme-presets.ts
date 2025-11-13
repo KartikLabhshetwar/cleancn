@@ -449,84 +449,98 @@ A minimalist approach that uses oversized typography and high contrast to create
     prompt: `Transform my website to use Glassmorphism design style.
 
 ## Style Overview
-A modern design trend featuring frosted-glass effect with transparency, blur, and depth. Creates a sense of hierarchy through layering.
+A modern design trend featuring frosted-glass effect with transparency, blur, and depth. Creates a sense of hierarchy through layering. Elements appear as translucent glass panels floating above colorful backgrounds.
 
 ## Key Characteristics
-- Semi-transparent backgrounds with backdrop blur
-- Subtle borders with low opacity
-- Soft, colorful shadows with glow effect
-- Large border radius for smooth, modern feel
+- Semi-transparent backgrounds with backdrop blur (backdrop-filter: blur())
+- Light borders with low opacity (white/light with 20-30% opacity)
+- Soft, colorful shadows with subtle glow
+- Large border radius (16-24px) for smooth, modern feel
 - Layered depth with z-index hierarchy
-- Vibrant, saturated accent colors
+- Vibrant, colorful backgrounds behind glass elements
+- High contrast text for readability
 
 ## Color Palette
-- Backgrounds: Semi-transparent white/light colors (opacity 60-80%)
-- Borders: White with 20-30% opacity
-- Shadows: Colored shadows matching accent colors
-- Accents: Vibrant purples, blues, pinks
-- Text: High contrast for readability
+- Background: Vibrant gradient or colorful solid (purple, blue, pink gradients)
+- Glass surfaces: Semi-transparent white/light (rgba(255, 255, 255, 0.1-0.25))
+- Borders: White with 20-30% opacity (rgba(255, 255, 255, 0.2-0.3))
+- Shadows: Colored shadows matching accent colors with low opacity
+- Accents: Vibrant purples, blues, pinks, cyans
+- Text: Dark, high contrast for readability on glass
 
 ## Effects & Properties
-- backdrop-filter: blur(16px) saturate(180%)
-- background: rgba(255, 255, 255, 0.7)
-- border: 1px solid rgba(255, 255, 255, 0.3)
-- box-shadow: 0 8px 32px rgba(color, 0.15)
-- Border radius: 12-16px
+- backdrop-filter: blur(20px) saturate(180%)
+- background: rgba(255, 255, 255, 0.1-0.25) - very low opacity
+- border: 1px solid rgba(255, 255, 255, 0.2-0.3)
+- box-shadow: 0 8px 32px rgba(accent-color, 0.15-0.25)
+- Border radius: 16-24px (large, rounded)
 
 ## Component Styling Examples
 
 ### Cards (Glass Effect)
-- Background: rgba(255, 255, 255, 0.7)
-- Backdrop filter: blur(16px)
-- Border: 1px solid rgba(255, 255, 255, 0.3)
-- Shadow: 0 8px 24px rgba(0, 0, 0, 0.1)
-- Border radius: 16px
+- Background: rgba(255, 255, 255, 0.15) - very transparent
+- Backdrop filter: blur(20px) saturate(180%)
+- Border: 1px solid rgba(255, 255, 255, 0.25)
+- Shadow: 0 8px 32px rgba(accent-color, 0.2)
+- Border radius: 20px
+- Background behind must be colorful/vibrant
 
 ### Buttons
-- Semi-transparent background
-- Backdrop blur on hover
-- Subtle glow effect
+- Semi-transparent background: rgba(255, 255, 255, 0.2)
+- Backdrop blur: blur(10px)
+- Border: 1px solid rgba(255, 255, 255, 0.3)
+- Hover: Slightly more opaque, increased blur
 - Smooth transitions (300ms)
 
 ### Navigation
 - Sticky position with glass effect
+- Background: rgba(255, 255, 255, 0.1)
+- Backdrop blur: blur(20px)
+- Border bottom: 1px solid rgba(255, 255, 255, 0.2)
 - Blur increases on scroll
-- Semi-transparent with border
+
+### Background Requirements
+- MUST have colorful/vibrant background behind glass elements
+- Use gradients: purple to blue, pink to cyan, etc.
+- Glass effect is only visible against colorful backgrounds
+- Without colorful background, glassmorphism doesn't work
 
 ## Implementation Guidelines
-- Use backdrop-filter: blur() for frosted effect
+- Use backdrop-filter: blur(20px) saturate(180%) for frosted effect
+- Background opacity: 0.1-0.25 (very low, not 0.6-0.7)
 - Layer elements with proper z-index
-- Ensure sufficient contrast for accessibility
-- Add subtle gradients for depth
-- Use CSS will-change for performance
+- Ensure colorful background behind glass elements
+- Add subtle colored shadows matching accent colors
+- Use CSS will-change: transform for performance
 - Test on different backgrounds
-- Provide fallback for unsupported browsers
-- Keep blur radius reasonable (12-20px max)`,
+- Provide fallback solid background for unsupported browsers
+- Keep blur radius 16-24px for optimal effect
+- Text must have high contrast (dark on light glass)`,
     theme: {
       name: "glassmorphism",
       colors: {
-        primary: "oklch(0.60 0.22 262)",
+        primary: "oklch(0.65 0.22 350)",
         primaryForeground: "oklch(0.99 0 0)",
-        surface: "oklch(0.96 0.01 262)",
-        surfaceAlt: "oklch(0.92 0.02 262)",
+        surface: "oklch(0.95 0.05 30)",
+        surfaceAlt: "oklch(0.92 0.08 40)",
         foreground: "oklch(0.20 0 0)",
-        muted: "oklch(0.88 0.02 262)",
+        muted: "oklch(1 0 0 / 0.15)",
         mutedForeground: "oklch(0.50 0 0)",
-        accent: "oklch(0.70 0.25 320)",
+        accent: "oklch(0.75 0.20 330)",
         accentForeground: "oklch(0.99 0 0)",
-        border: "oklch(0.85 0.03 262 / 0.3)",
-        input: "oklch(0.85 0.03 262 / 0.3)",
-        ring: "oklch(0.60 0.22 262)",
-        destructive: "oklch(0.60 0.24 25)",
+        border: "oklch(1 0 0 / 0.25)",
+        input: "oklch(1 0 0 / 0.2)",
+        ring: "oklch(0.65 0.22 350)",
+        destructive: "oklch(0.65 0.24 25)",
         destructiveForeground: "oklch(0.99 0 0)",
-        card: "oklch(0.96 0.01 262 / 0.7)",
+        card: "oklch(1 0 0 / 0.15)",
         cardForeground: "oklch(0.20 0 0)",
-        popover: "oklch(0.96 0.01 262 / 0.7)",
+        popover: "oklch(1 0 0 / 0.15)",
         popoverForeground: "oklch(0.20 0 0)",
-        secondary: "oklch(0.88 0.08 262)",
+        secondary: "oklch(1 0 0 / 0.2)",
         secondaryForeground: "oklch(0.20 0 0)",
       },
-      radius: "lg",
+      radius: "xl",
       spacingScale: [6, 12, 18, 24, 36, 48, 72, 96, 144, 192],
       typeScale: {
         base: 16,
@@ -538,16 +552,16 @@ A modern design trend featuring frosted-glass effect with transparency, blur, an
         h6: 16,
         leading: { tight: 1.25, normal: 1.5, relaxed: 1.75, loose: 2 },
       },
-      border: { weight: 1, style: "solid", contrast: 0.5 },
+      border: { weight: 1, style: "solid", contrast: 0.3 },
       shadow: {
-        strength: 0.15,
-        blur: 24,
-        yOffset: 4,
+        strength: 0.2,
+        blur: 32,
+        yOffset: 8,
         xOffset: 0,
         inner: false,
-        color: "oklch(0.60 0.22 262 / 0.2)",
+        color: "oklch(0.65 0.22 350 / 0.2)",
       },
-      effects: { glassAlpha: 0.6, glassBlur: 16, grain: 0, saturation: 1.15, contrast: 1, glow: 8 },
+      effects: { glassAlpha: 0.15, glassBlur: 20, grain: 0, saturation: 1.2, contrast: 1.1, glow: 12 },
       layout: { cardDensity: "normal", gridStyle: "standard", gapScale: 1.3 },
     },
   },

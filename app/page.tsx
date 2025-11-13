@@ -11,12 +11,23 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 import { PromptInput } from "@/components/prompt-input";
 import { themePresets } from "@/lib/theme-presets";
 import { useTheme } from "@/lib/theme-provider";
-import { Copy, Check, Sparkles, Palette, Zap, Code } from "lucide-react";
+import { Copy, Check, Sparkles, Palette, Zap, Code, AlertCircle, Info, CheckCircle2, XCircle } from "lucide-react";
 import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function Home() {
-  const { setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
   const [copiedId, setCopiedId] = useState<string | null>(null);
+  const isGlassmorphism = theme.name === "glassmorphism";
 
   const handleTryTheme = (presetId: string) => {
     const preset = themePresets.find((p) => p.id === presetId);
@@ -34,7 +45,12 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div 
+      className="min-h-screen bg-background relative"
+      style={isGlassmorphism ? {
+        background: "linear-gradient(135deg, oklch(0.95 0.05 30) 0%, oklch(0.92 0.08 40) 50%, oklch(0.90 0.10 50) 100%)",
+      } : undefined}
+    >
       <Nav>
         <NavBrand href="/">Cleancn</NavBrand>
         <NavList>
@@ -180,7 +196,7 @@ export default function Home() {
                 <CardTitle>Buttons</CardTitle>
                 <CardDescription>Multiple variants and sizes</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-3">
+              <CardContent className="space-y-4">
                 <div className="flex flex-wrap gap-2">
                   <Button>Primary</Button>
                   <Button variant="secondary">Secondary</Button>
@@ -210,13 +226,247 @@ export default function Home() {
 
             <Card>
               <CardHeader>
-                <CardTitle>Cards</CardTitle>
-                <CardDescription>Flexible card components</CardDescription>
+                <CardTitle>Badges & Tags</CardTitle>
+                <CardDescription>Status indicators and labels</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex flex-wrap gap-2">
+                  <Badge>Default</Badge>
+                  <Badge variant="secondary">Secondary</Badge>
+                  <Badge variant="outline">Outline</Badge>
+                  <Badge variant="destructive">Destructive</Badge>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  <Badge>New</Badge>
+                  <Badge variant="secondary">Featured</Badge>
+                  <Badge variant="outline">Coming Soon</Badge>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Alerts & Notifications</CardTitle>
+                <CardDescription>Important messages and feedback</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Alert>
+                  <Info className="h-4 w-4" />
+                  <AlertTitle>Information</AlertTitle>
+                  <AlertDescription>
+                    This is an informational alert message.
+                  </AlertDescription>
+                </Alert>
+                <Alert variant="destructive">
+                  <AlertCircle className="h-4 w-4" />
+                  <AlertTitle>Error</AlertTitle>
+                  <AlertDescription>
+                    Something went wrong. Please try again.
+                  </AlertDescription>
+                </Alert>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Avatars</CardTitle>
+                <CardDescription>User profile images and initials</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center gap-4">
+                  <Avatar>
+                    <AvatarFallback>JD</AvatarFallback>
+                  </Avatar>
+                  <Avatar>
+                    <AvatarFallback>AB</AvatarFallback>
+                  </Avatar>
+                  <Avatar>
+                    <AvatarFallback>CD</AvatarFallback>
+                  </Avatar>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Avatar className="h-12 w-12">
+                    <AvatarFallback>LG</AvatarFallback>
+                  </Avatar>
+                  <Avatar className="h-16 w-16">
+                    <AvatarFallback>XL</AvatarFallback>
+                  </Avatar>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Switches & Toggles</CardTitle>
+                <CardDescription>On/off controls</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <label className="text-sm font-medium">Enable notifications</label>
+                  <Switch defaultChecked />
+                </div>
+                <div className="flex items-center justify-between">
+                  <label className="text-sm font-medium">Dark mode</label>
+                  <Switch />
+                </div>
+                <div className="flex items-center justify-between">
+                  <label className="text-sm font-medium">Auto-save</label>
+                  <Switch defaultChecked />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Sliders</CardTitle>
+                <CardDescription>Range and value selection</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Volume</label>
+                  <Slider defaultValue={[50]} max={100} step={1} />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Brightness</label>
+                  <Slider defaultValue={[75]} max={100} step={1} />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Range</label>
+                  <Slider defaultValue={[25, 75]} max={100} step={1} />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Checkboxes</CardTitle>
+                <CardDescription>Multiple selection options</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="flex items-center space-x-2">
+                  <Checkbox id="terms" defaultChecked />
+                  <label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    Accept terms and conditions
+                  </label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox id="newsletter" />
+                  <label htmlFor="newsletter" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    Subscribe to newsletter
+                  </label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox id="marketing" defaultChecked />
+                  <label htmlFor="marketing" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                    Receive marketing emails
+                  </label>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Radio Groups</CardTitle>
+                <CardDescription>Single selection options</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Cards adapt to the theme's border, shadow, and radius settings automatically.
-                </p>
+                <RadioGroup defaultValue="option-one">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="option-one" id="option-one" />
+                    <label htmlFor="option-one" className="text-sm font-medium leading-none cursor-pointer">
+                      Option One
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="option-two" id="option-two" />
+                    <label htmlFor="option-two" className="text-sm font-medium leading-none cursor-pointer">
+                      Option Two
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="option-three" id="option-three" />
+                    <label htmlFor="option-three" className="text-sm font-medium leading-none cursor-pointer">
+                      Option Three
+                    </label>
+                  </div>
+                </RadioGroup>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Select Dropdown</CardTitle>
+                <CardDescription>Single selection from list</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an option" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="option-1">Option 1</SelectItem>
+                    <SelectItem value="option-2">Option 2</SelectItem>
+                    <SelectItem value="option-3">Option 3</SelectItem>
+                  </SelectContent>
+                </Select>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choose a theme" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="light">Light</SelectItem>
+                    <SelectItem value="dark">Dark</SelectItem>
+                    <SelectItem value="auto">Auto</SelectItem>
+                  </SelectContent>
+                </Select>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Tooltips</CardTitle>
+                <CardDescription>Hover for additional information</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center gap-4">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button variant="outline">Hover me</Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>This is a tooltip</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button variant="outline">Or me</Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Another tooltip with more text</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Skeleton Loaders</CardTitle>
+                <CardDescription>Loading state placeholders</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="space-y-2">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-5/6" />
+                  <Skeleton className="h-4 w-4/6" />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <Skeleton className="h-12 w-12 rounded-full" />
+                  <div className="space-y-2 flex-1">
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-3/4" />
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
@@ -248,27 +498,13 @@ export default function Home() {
                   <CardHeader>
                     <CardTitle className="text-lg">Nested Card</CardTitle>
                     <CardDescription>This card is nested inside another card</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
                       All UI elements use the same design tokens for a cohesive look.
                     </p>
                   </CardContent>
                 </Card>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Interactive Elements</CardTitle>
-                <CardDescription>Hover and focus states</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button className="w-full">Hover me</Button>
-                <Input placeholder="Focus me" />
-                <p className="text-xs text-muted-foreground">
-                  All interactive elements respond to theme changes instantly.
-                </p>
               </CardContent>
             </Card>
           </div>
