@@ -33,10 +33,10 @@ const keywordRules: KeywordRule[] = [
     }),
   },
   {
-    keywords: ["sharp", "tech", "angular", "crisp"],
+    keywords: ["sharp", "tech", "angular", "crisp", "no rounded", "square"],
     apply: (theme) => ({
       ...theme,
-      radius: "sm" as RadiusSize,
+      radius: "none" as RadiusSize,
     }),
   },
   {

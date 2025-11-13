@@ -1,4 +1,4 @@
-export type RadiusSize = "sm" | "md" | "lg" | "xl";
+export type RadiusSize = "none" | "sm" | "md" | "lg" | "xl";
 export type GridStyle = "standard" | "bento";
 
 export interface ThemeColors {
@@ -152,6 +152,7 @@ export const defaultTheme: ThemeConfig = {
 
 export function radiusToPixels(size: RadiusSize): string {
   const map = {
+    none: "0",
     sm: "0.375rem",
     md: "0.5rem",
     lg: "0.75rem",
@@ -161,6 +162,15 @@ export function radiusToPixels(size: RadiusSize): string {
 }
 
 export function generateCSSVariables(theme: ThemeConfig): Record<string, string> {
+  const shadowColor = theme.shadow.color || "oklch(0 0 0 / 0.1)";
+  const boxShadowValue = theme.shadow.strength > 0
+    ? `${theme.shadow.xOffset}px ${theme.shadow.yOffset}px ${theme.shadow.blur}px ${shadowColor}`
+    : "none";
+  
+  const cardShadowValue = theme.shadow.strength > 0
+    ? `${theme.shadow.xOffset * 2}px ${theme.shadow.yOffset * 2}px ${theme.shadow.blur}px ${shadowColor}`
+    : "none";
+
   return {
     "--background": theme.colors.surface,
     "--foreground": theme.colors.foreground,
@@ -191,6 +201,8 @@ export function generateCSSVariables(theme: ThemeConfig): Record<string, string>
     "--shadow-blur": `${theme.shadow.blur}px`,
     "--shadow-offset-x": `${theme.shadow.xOffset}px`,
     "--shadow-offset-y": `${theme.shadow.yOffset}px`,
+    "--box-shadow": boxShadowValue,
+    "--card-shadow": cardShadowValue,
     "--glass-alpha": theme.effects.glassAlpha.toString(),
     "--glass-blur": `${theme.effects.glassBlur}px`,
     "--saturation": theme.effects.saturation.toString(),

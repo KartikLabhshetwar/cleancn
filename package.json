@@ -2,14 +2,10 @@
   "name": "cleancn",
   "version": "0.1.0",
   "private": true,
-  "bin": {
-    "cleancn": "./cli/index.ts"
-  },
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
-    "start": "next start",
-    "cli": "tsx cli/index.ts"
+    "start": "next start"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",

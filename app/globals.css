@@ -41,6 +41,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --shadow-xs: var(--box-shadow, 0 1px 2px 0 rgb(0 0 0 / 0.05));
+  --shadow-sm: var(--box-shadow, 0 1px 3px 0 rgb(0 0 0 / 0.1));
+  --shadow-md: var(--card-shadow, 0 4px 6px -1px rgb(0 0 0 / 0.1));
 }
 
 :root {
